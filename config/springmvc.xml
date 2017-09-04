@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+	<!-- 非注解适配器 一-->
+<!-- 	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean> -->
+<!-- 	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"></bean> -->
+	
+	<!-- 非注解映射器 -->
+<!-- 	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean> -->
+	<!-- 非注解：批量映射 -->
+<!-- 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> -->
+<!-- 		<property name="mappings"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="/queryItems1.action">myController</prop> -->
+<!-- 				<prop key="/queryItems3.action">myController1</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	<!-- 配置Handler -->
+<!-- 	<bean id="myController" name="/queryItems.action" class="ssm.controller.MyController"></bean> -->
+<!-- 	<bean id="myController1" name="/queryItems2.action" class="ssm.controller.MyHttpRequestHandler"></bean> -->
+	
+	<!-- 注解适配器和映射器 -->
+	<!--   <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean>   -->
+	<!--   <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>    -->
+
+	<!-- 以上2句可用下面一句替代，且若配置了下面的，则上面2个不能配置了 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	
+	
+	<!-- 注解的Handler配置:一个Handler的配置 -->
+<!-- 	<bean class="ssm.controller.ItemsController"></bean> -->
+	<!-- 注解的Handler配置:批量Handler的配置 -->
+	<context:component-scan base-package="ssm.controller"></context:component-scan>
+	
+	
+	<!-- 配置视图解析器，从action到跳转到其他页面的地址解析 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<bean id="ordersService" class="ssm.service.OrdersServiceImpl"></bean>
+	
+	
+</beans>
