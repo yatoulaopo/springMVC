@@ -13,6 +13,10 @@
 		document.form2.action="${pageContext.request.contextPath}/user/deleteUserByIdArray.action";
 		document.form2.submit();
 	}
+	function updateByUserArray(){
+		document.form2.action="${pageContext.request.contextPath}/user/updateByUserArray.action";
+		document.form2.submit();
+	}
 
 </script>
 <style type="text/css">
@@ -26,6 +30,7 @@
 	<form method="post" name="form2">
 	<table border="1" bordercolor="black" cellspacing="0" cellpadding="3" width="70%" style="text-alin:center;">
 		<tr>
+			<td>选择</td>
 			<td>id</td>
 			<td>username</td>
 			<td>city</td>
@@ -47,7 +52,7 @@
 		
 		</c:forEach>
 		<tr>
-			<td colspan="6"><input type="button" value="批量删除" onclick="deleteByIdArray1()"/><span style="text-align:right;"><a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=${pageBean.page-1}">上一页</a>&nbsp;&nbsp;&nbsp;${pageBean.page}&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=${pageBean.page+1}">下一页</a></span></td>
+			<td colspan="7"><input type="button" value="批量删除" onclick="deleteByIdArray1()"/><input type="button" value="批量修改" onclick="updateByUserArray()"/><span style="text-align:right;"><a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=${pageBean.page-1}">上一页</a>&nbsp;&nbsp;&nbsp;${pageBean.page}&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=${pageBean.page+1}">下一页</a></span></td>
 		</tr>
 	</table>
 	</form>

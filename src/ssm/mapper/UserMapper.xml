@@ -5,7 +5,7 @@
 <mapper namespace="ssm.mapper.UserMapper">
 	<!-- 二级缓存的配置，二级缓存和namespace保持一致，即一个namespace保持同一个二级缓存区 -->
 	<!-- 整合ehcache,  readOnly为true性能高，但不安全，默认false，安全 -->
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache" flushInterval="6000" size="1024" readOnly="false"></cache>
+<!-- 	<cache type="org.mybatis.caches.ehcache.EhcacheCache" flushInterval="6000" size="1024" readOnly="false"></cache> -->
 	
 	<!-- 定义resultMap -->
 	<resultMap type="user" id="userResultMap">

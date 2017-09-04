@@ -19,4 +19,6 @@ public interface UserService {
 	public List<User> pageQueryUserList(HashMap<String,Integer> map)throws Exception;
 	//根据id 删除一个用户
 	public void deleteById(Integer integer)throws Exception;
+	//根据id数组，查询出一个list<User>
+	public List<User> findListUser(Integer[] listId)throws Exception;
 }

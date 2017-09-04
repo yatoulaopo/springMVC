@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ssm.bean.PageBean;
 import ssm.mapper.UserMapper;
 import ssm.po.User;
+import ssm.po.UserQueryVo;
 import ssm.service.UserService;
 
 /**
@@ -89,12 +90,33 @@ public class UserController {
 		return "redirect:queryUserListPage.action?page=1";
 	}
 	
-	//根据id的数组，批量删除一批用户
-		@RequestMapping("/deleteUserById")
-		public String deleteUserById(Integer id)throws Exception{
-			userService.deleteById(id);
-			return "redirect:queryUserListPage.action?page=1";
+	//根据id，批量删除用户
+	@RequestMapping("/deleteUserById")
+	public String deleteUserById(Integer id)throws Exception{
+		userService.deleteById(id);
+		return "redirect:queryUserListPage.action?page=1";
+	}
+		
+	//根据id批量查找用户，并跳转到批量用户的展示页面
+	@RequestMapping("/updateByUserArray")
+	public ModelAndView updateByUserArray(Integer[] listId)throws Exception{
+		//根据id数组，查询出一个list<User>
+		List<User> listUser = userService.findListUser(listId);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("listUser", listUser);
+		modelAndView.setViewName("user/updateUserBatch");
+		return modelAndView;
+	}
+	
+	//批量更新用户
+	@RequestMapping("/updateUserBatch.action")
+	public String updateUserBatch(UserQueryVo userQueryVo)throws Exception{
+		List<User> listUser = userQueryVo.getListUser();
+		for (User user : listUser) {
+			userService.updateUser(user, user.getId());
 		}
+		return "redirect:queryUserListPage.action?page=1";
+	}
 	
 	public UserService getUserService() {
 		return userService;

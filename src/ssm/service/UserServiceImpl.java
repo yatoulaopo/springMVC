@@ -1,5 +1,6 @@
 package ssm.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,6 +57,15 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 		}
 		
+	}
+	//根据id数组，查询出一个list<User>
+	public List<User> findListUser(Integer[] listId) throws Exception {
+		List<User> listUser = new ArrayList<User>();
+		for (int i = 0; i < listId.length; i++) {
+			User user = userMapper.findUserById(listId[i]);
+			listUser.add(user);
+		}
+		return listUser;
 	}
 
 

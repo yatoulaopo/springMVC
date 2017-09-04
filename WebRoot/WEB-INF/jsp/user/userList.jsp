@@ -25,8 +25,9 @@
 <h3>所有的用户列表</h3>
 <c:if test="${listUser!=null && listUser.size()!=0 }">
 	<form name="form1" method="post">
-	<table border="1" bordercolor="black" cellspacing="0" cellpadding="3" width="70%" style="text-alin:center;">
+	<table border="1" cellspacing="0" width="70%" style="text-alin:center;">
 		<tr>
+			<td>选择</td>
 			<td>id</td>
 			<td>username</td>
 			<td>city</td>
