@@ -1,7 +1,11 @@
 package ssm.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ssm.bean.PageBean;
+import ssm.mapper.UserMapper;
 import ssm.po.User;
 import ssm.service.UserService;
 
@@ -46,17 +51,17 @@ public class UserController {
 	@RequestMapping("/updateUser.action")
 	public String updateUser(int id,User user)throws Exception{
 		userService.updateUser(user, id);
-		return "redirect:queryUserList.action";
+		return "redirect:queryUserListPage.action?page=1";
 	}
 	
 	//分页显示
-	@RequestMapping("queryUserListPage")
-	public ModelAndView queryUserListPage(int page)throws Exception{
+	@RequestMapping("/queryUserListPage")
+	public ModelAndView queryUserListPage(Integer page)throws Exception{
 		//page/totalCount/onePageCount/pageCount/userList/beginIndex;
 		ModelAndView modelAndView = new ModelAndView();
 		PageBean pageBean = new PageBean();
 		int totalCount = userService.findUserCount();
-		int onePageCount = 10;
+		int onePageCount = 15;
 		int pageCount = (totalCount+onePageCount-1)/onePageCount;
 		int beginIndex = (page -1)*onePageCount;
 		HashMap<String,Integer> map = new HashMap<String,Integer>();
@@ -75,7 +80,21 @@ public class UserController {
 		return modelAndView;
 	}
 	
+	//根据id的数组，批量删除一批用户
+	@RequestMapping("/deleteUserByIdArray")
+	public String deleteUserByIdArray(Integer[] listId)throws Exception{
+		for (int i = 0; i < listId.length; i++) {
+			userService.deleteById(listId[i]);
+		}
+		return "redirect:queryUserListPage.action?page=1";
+	}
 	
+	//根据id的数组，批量删除一批用户
+		@RequestMapping("/deleteUserById")
+		public String deleteUserById(Integer id)throws Exception{
+			userService.deleteById(id);
+			return "redirect:queryUserListPage.action?page=1";
+		}
 	
 	public UserService getUserService() {
 		return userService;

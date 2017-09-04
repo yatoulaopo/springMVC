@@ -17,4 +17,6 @@ public interface UserService {
 	
 	//分页查询：每一页的记录的List<User>
 	public List<User> pageQueryUserList(HashMap<String,Integer> map)throws Exception;
+	//根据id 删除一个用户
+	public void deleteById(Integer integer)throws Exception;
 }

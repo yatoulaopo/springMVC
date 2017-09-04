@@ -47,6 +47,16 @@ public class UserServiceImpl implements UserService {
 		List<User> userList = userMapper.pageQueryUserList(map);
 		return userList;
 	}
+	
+	//根据id删除一个用户
+	public void deleteById(Integer integer){
+		try {
+			userMapper.deleteUserById(integer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 
 

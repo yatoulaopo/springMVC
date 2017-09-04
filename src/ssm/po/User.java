@@ -9,6 +9,15 @@ public class User implements Serializable{
 	private String username;
 	private String city;
 	
+	//批量删除，根据List<id>
+	private Integer[] ListId;
+	
+	public Integer[] getListId() {
+		return ListId;
+	}
+	public void setListId(Integer[] listId) {
+		ListId = listId;
+	}
 	//用于测试自定义转换器，把前端页面传过来的S天ring格式的字符串转换为User类的date格式的日期
 	private Date createTime;
 	

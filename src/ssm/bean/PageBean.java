@@ -14,7 +14,7 @@ public class PageBean {
 	//当前页的记录
 	private List<User> userList;
 	//当前页
-	private int page;
+	private Integer page;
 	public int getPage() {
 		return page;
 	}
