@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ssm.exception.UserException;
 import ssm.mapper.UserMapper;
 import ssm.po.User;
 
@@ -18,9 +19,13 @@ public class UserServiceImpl implements UserService {
 		 return userMapper.findAllUser();
 	}
 	//根据id查询一个user对象
-	@Override
-	public User findUserById(int id) throws Exception {
-		return userMapper.findUserById(id);
+	//和业务相关的异常应该在service层检查并抛出异常（测试全局异常解析器）
+	public User findUserById(int id) throws Exception  {
+		User user = userMapper.findUserById(id);
+		if(user == null) {
+			throw new UserException("要修改的用户不存在！");
+		}
+		return user;
 	}
 	
 	@Override

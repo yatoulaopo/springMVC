@@ -9,10 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ssm.bean.PageBean;
+import ssm.groups.ValidGroup1;
+import ssm.groups.ValidGroup2;
 import ssm.mapper.UserMapper;
 import ssm.po.User;
 import ssm.po.UserQueryVo;
@@ -50,7 +56,18 @@ public class UserController {
 	
 	//根据user对象（要有id值），去更新数据库中的数据
 	@RequestMapping("/updateUser.action")
-	public String updateUser(int id,User user)throws Exception{
+	public String updateUser(int id,Model model,@Validated(value={ValidGroup1.class,ValidGroup2.class}) User user,BindingResult bindingResult)throws Exception{
+		//先判断是否捕获到错误
+		if(bindingResult.hasErrors()) {
+			//代表有错误了
+			List<ObjectError> errorList = bindingResult.getAllErrors();
+			for (ObjectError objectError : errorList) {
+				String errorMessage = objectError.getDefaultMessage();
+				System.out.println(errorMessage);
+			}
+			model.addAttribute("errorList", errorList);
+			return "user/error";
+		}
 		userService.updateUser(user, id);
 		return "redirect:queryUserListPage.action?page=1";
 	}

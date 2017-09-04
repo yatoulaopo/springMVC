@@ -4,11 +4,22 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import ssm.groups.ValidGroup1;
+import ssm.groups.ValidGroup2;
+
 public class User implements Serializable{
 	private Integer id;
+	//校验器校验
+	@Size(min=5,max=15,message="{user.username.size.error}",groups={ValidGroup1.class})
 	private String username;
 	private String city;
+	@NotNull(message="{user.createTime.notNull.error}",groups= {ValidGroup2.class})
+	private Date createTime;
 	
+	private String country;
 	//批量删除，根据List<id>
 	private Integer[] ListId;
 	
@@ -19,9 +30,6 @@ public class User implements Serializable{
 		ListId = listId;
 	}
 	//用于测试自定义转换器，把前端页面传过来的S天ring格式的字符串转换为User类的date格式的日期
-	private Date createTime;
-	
-	private String country;
 	//多对多：根据用户信息，关联订单，关联订单项，关联商品
 	private List<Orders> listOrders;
 	public Date getCreateTime() {
