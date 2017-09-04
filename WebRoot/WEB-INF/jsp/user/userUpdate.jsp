@@ -29,6 +29,10 @@
 			<td><input type="text" value="${user.country }" name="country"/></td>
 		</tr>
 		<tr>
+			<td>创建时间:</td>
+			<td><input type="text" value="${user.createTime }" name="createTime"/></td>
+		</tr>
+		<tr>
 			<td colspan="2"><input type="submit" value="提交"/></td>
 			
 		</tr>

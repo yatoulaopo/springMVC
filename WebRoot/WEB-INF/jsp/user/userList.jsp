@@ -19,6 +19,7 @@
 			<td>username</td>
 			<td>city</td>
 			<td>country</td>
+			<td>createTime</td>
 			<td>操作</td>
 		</tr>
 		<c:forEach items="${listUser}" var="user">
@@ -27,6 +28,7 @@
 				<td>${user.username}</td>
 				<td>${user.city}</td>
 				<td>${user.country}</td>
+				<td>${user.createTime}</td>
 				<td><a href="${pageContext.request.contextPath}/user/findUserById.action?id=${user.id}">修改</a>&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/user/deleteUserById.action?id=${user.id}">删除</a></td>
 			</tr>
 		</c:forEach>

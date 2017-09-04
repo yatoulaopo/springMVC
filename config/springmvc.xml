@@ -35,8 +35,18 @@
 	<!--   <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>    -->
 
 	<!-- 以上2句可用下面一句替代，且若配置了下面的，则上面2个不能配置了 -->
-	<mvc:annotation-driven></mvc:annotation-driven>
-	
+	<!-- 在处理器适配器中配置自定义的转换器 -->
+	<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+	<!-- 配置转换器服务 -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<!-- 配置属性converters -->
+		<property name="converters">
+			<list>
+				<!-- 配置自定义的转换器 -->
+				<bean class="ssm.converter.MyDateConverter"></bean>
+			</list>
+		</property>
+	</bean>
 	
 	
 	<!-- 注解的Handler配置:一个Handler的配置 -->

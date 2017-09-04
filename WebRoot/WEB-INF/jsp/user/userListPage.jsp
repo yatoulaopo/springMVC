@@ -20,6 +20,7 @@
 			<td>username</td>
 			<td>city</td>
 			<td>country</td>
+			<td>createTime</td>
 			<td>操作</td>
 		</tr>
 		<c:forEach items="${pageBean.userList }" var="user">
@@ -29,12 +30,13 @@
 			<td>${user.username}</td>
 			<td>${user.city}</td>
 			<td>${user.country}</td>
+			<td>${user.createTime}</td>
 			<td><a href="${pageContext.request.contextPath}/user/findUserById.action?id=${user.id}">修改</a>&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/user/deleteUserById.action?id=${user.id}">删除</a></td>
 		</tr>
 		
 		</c:forEach>
 		<tr>
-			<td colspan="5" align="right" style="text-align: right;"><a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=${pageBean.page-1}">上一页</a>&nbsp;&nbsp;&nbsp;${pageBean.page}&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=${pageBean.page+1}">下一页</a></td>
+			<td colspan="6" align="right" style="text-align: right;"><a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=${pageBean.page-1}">上一页</a>&nbsp;&nbsp;&nbsp;${pageBean.page}&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=${pageBean.page+1}">下一页</a></td>
 		</tr>
 	</table>
 	</c:if>
