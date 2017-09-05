@@ -19,6 +19,14 @@ public class User implements Serializable{
 	@NotNull(message="{user.createTime.notNull.error}",groups= {ValidGroup2.class})
 	private Date createTime;
 	
+	private String password;
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	//springmvc的文件上传
 	private String filename;
 	

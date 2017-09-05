@@ -42,6 +42,8 @@ public interface UserMapper {
 	
 	//多对多resultMap:根据用户查询订单，查询订单项，最后关联查询商品信息
 	public List<User> selectByResultMapManyToMany()throws Exception;
+	////前端登录 username,password是否正确
+	public User findUserByLogin(HashMap<String,String> map );
 	
 	
 	

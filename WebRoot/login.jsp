@@ -8,9 +8,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<h3>分页显示，传入page值</h3>
-<h1><a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=1">用户列表</a></h1>
-<h1><a href="${pageContext.request.contextPath }/login.jsp">登录</a></h1>
+<h3 style="color:red;">${msg}</h3>​
+<form action="${pageContext.request.contextPath}/user/login.action">
+	<table>
+		<tr>
+			<td>用户名:</td>
+			<td><input type="text" name="username"/></td>
+		</tr>
+		<tr>
+			<td>密码:</td>
+			<td><input type="password" name="password"/></td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="submit" value="登录"/></td>
+		</tr>
+	</table>
+</form>
 </body>
 </html>

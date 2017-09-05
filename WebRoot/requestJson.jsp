@@ -12,7 +12,7 @@
 			type:'post',
 			contentType:'application/json;charset=utf-8',
 			url:'${pageContext.request.contextPath}/user/requestJson.action',
-			data:'{"city":"罗马","country":"意大利",}',
+			data:'{"city":"罗马","country":"意大利"}',
 			success:function(data){
 				alert(data.country);
 			}

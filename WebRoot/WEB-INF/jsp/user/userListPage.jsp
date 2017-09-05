@@ -24,6 +24,9 @@
 </style>
 </head>
 <body>
+<c:if test="${username != null}">
+	<h1 style="color:red;">欢迎您，${username}</h1>
+</c:if>
 <h2>分页显示用户列表</h2>
 <c:if test="${pageBean != null }">
 	<c:if test="${pageBean.userList != null }">

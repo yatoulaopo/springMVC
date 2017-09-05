@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -147,6 +148,23 @@ public class UserController {
 		}
 		return "redirect:queryUserListPage.action?page=1";
 	}
+	
+	//用户登录
+	@RequestMapping("/login.action")
+	public String login(Model model,HttpSession session,String username,String password)throws Exception{
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("username", username);
+		map.put("password", password);
+		User user = userService.findUserByLogin(map);
+		if(user == null) {
+			model.addAttribute("msg", "用户名或者密码错误");
+			return "forward:/login.jsp";
+		}else {
+			session.setAttribute("username", username);
+			return "redirect:queryUserListPage.action?page=1";
+		}
+	}
+	
 	
 	//json数据交互
 	@RequestMapping("/requestJson.action")

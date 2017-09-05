@@ -21,4 +21,6 @@ public interface UserService {
 	public void deleteById(Integer integer)throws Exception;
 	//根据id数组，查询出一个list<User>
 	public List<User> findListUser(Integer[] listId)throws Exception;
+	//检查数据库是否存在username,password
+	public User findUserByLogin(HashMap<String,String> map);
 }

@@ -72,6 +72,11 @@ public class UserServiceImpl implements UserService {
 		}
 		return listUser;
 	}
+	//前端登录 username,password是否正确
+	public User findUserByLogin(HashMap<String,String> map) {
+		User user = userMapper.findUserByLogin(map);
+		return user;
+	}
 
 
 
