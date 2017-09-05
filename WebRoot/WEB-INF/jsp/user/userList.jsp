@@ -24,8 +24,8 @@
 <body>
 <h3>所有的用户列表</h3>
 <c:if test="${listUser!=null && listUser.size()!=0 }">
-	<form name="form1" method="post">
-	<table border="1" cellspacing="0" width="70%" style="text-alin:center;">
+	<form name="form1" method="post" >
+	<table border="1" cellspacing="0" width="" style="text-alin:center;">
 		<tr>
 			<td>选择</td>
 			<td>id</td>
@@ -44,11 +44,16 @@
 				<td>${user.city}</td>
 				<td>${user.country}</td>
 				<td><fmt:formatDate value='${user.createTime}' pattern="yyyy-MM-dd"/></td>
+				<td>
+					<c:if test="${user.filename != null}">
+						<img alt="" src="/pic/${user.filename}" width="100" height="100"/>
+					</c:if>
+				</td>
 				<td><a href="${pageContext.request.contextPath}/user/findUserById.action?id=${user.id}">修改</a>&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/user/deleteUserById.action?id=${user.id}">删除</a></td>
 			</tr>
 		</c:forEach>
 		<tr>
-			<td colspan="7"><input type="button" value="批量删除" onclick="deleteByIdArray()"/></td>
+			<td colspan="8"><input type="button" value="批量删除" onclick="deleteByIdArray()"/></td>
 		</tr>
 	</table>
 	</form>

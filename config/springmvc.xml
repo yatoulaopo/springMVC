@@ -50,13 +50,16 @@
 	</bean>
 	
 	<!-- 文件上传：多部件解析器 -->
-	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8"></property>
 		<!-- 配置最大上传 -->
-		<property name="maxUploadSize" value="52488"></property>
+		<property name="maxUploadSize">
+			<value>502488</value>
+		</property>
 	</bean>
 	
 	<!-- 配置自定义的全局异常解析器 -->
-	<bean class="ssm.exception.UserExceptionResolver"></bean>
+<!-- 	<bean class="ssm.exception.UserExceptionResolver"></bean> -->
 	
 	<!-- 配置校验器 -->
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">

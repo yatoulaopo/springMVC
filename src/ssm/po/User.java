@@ -19,6 +19,15 @@ public class User implements Serializable{
 	@NotNull(message="{user.createTime.notNull.error}",groups= {ValidGroup2.class})
 	private Date createTime;
 	
+	//springmvc的文件上传
+	private String filename;
+	
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	private String country;
 	//批量删除，根据List<id>
 	private Integer[] ListId;

@@ -28,7 +28,7 @@
 <c:if test="${pageBean != null }">
 	<c:if test="${pageBean.userList != null }">
 	<form method="post" name="form2">
-	<table border="1" bordercolor="black" cellspacing="0" cellpadding="3" width="70%" style="text-alin:center;">
+	<table border="1" bordercolor="black" cellspacing="0" cellpadding="3" width="" style="text-alin:center;">
 		<tr>
 			<td>选择</td>
 			<td>id</td>
@@ -36,6 +36,7 @@
 			<td>city</td>
 			<td>country</td>
 			<td>createTime</td>
+			<td>头像</td>
 			<td>操作</td>
 		</tr>
 		<c:forEach items="${pageBean.userList }" var="user">
@@ -47,12 +48,17 @@
 			<td>${user.city}</td>
 			<td>${user.country}</td>
 			<td><fmt:formatDate value='${user.createTime}' pattern="yyyy-MM-dd"/></td>
+			<td>
+					<c:if test="${user.filename != null}">
+						<img alt="" src="/pic/${user.filename}" width="100" height="100"/>
+					</c:if>
+			</td>
 			<td><a href="${pageContext.request.contextPath}/user/findUserById.action?id=${user.id}">修改</a>&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/user/deleteUserById.action?id=${user.id}">删除</a></td>
 		</tr>
 		
 		</c:forEach>
 		<tr>
-			<td colspan="7"><input type="button" value="批量删除" onclick="deleteByIdArray1()"/><input type="button" value="批量修改" onclick="updateByUserArray()"/><span style="text-align:right;"><a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=${pageBean.page-1}">上一页</a>&nbsp;&nbsp;&nbsp;${pageBean.page}&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=${pageBean.page+1}">下一页</a></span></td>
+			<td colspan="8"><input type="button" value="批量删除" onclick="deleteByIdArray1()"/><input type="button" value="批量修改" onclick="updateByUserArray()"/><span style="text-align:right;"><a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=${pageBean.page-1}">上一页</a>&nbsp;&nbsp;&nbsp;${pageBean.page}&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=${pageBean.page+1}">下一页</a></span></td>
 		</tr>
 	</table>
 	</form>

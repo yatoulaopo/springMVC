@@ -9,5 +9,6 @@
 <body>
 <h3>分页显示，传入page值</h3>
 <h1><a href="${pageContext.request.contextPath }/user/queryUserListPage.action?page=1">用户列表</a></h1>
+
 </body>
 </html>

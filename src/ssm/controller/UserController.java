@@ -1,8 +1,10 @@
 package ssm.controller;
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ssm.bean.PageBean;
@@ -56,7 +61,7 @@ public class UserController {
 	
 	//根据user对象（要有id值），去更新数据库中的数据
 	@RequestMapping("/updateUser.action")
-	public String updateUser(int id,Model model,@Validated(value={ValidGroup1.class,ValidGroup2.class}) User user,BindingResult bindingResult)throws Exception{
+	public String updateUser(MultipartFile multipartFile,int id,Model model,@Validated(value={ValidGroup1.class,ValidGroup2.class}) User user,BindingResult bindingResult)throws Exception{
 		//先判断是否捕获到错误
 		if(bindingResult.hasErrors()) {
 			//代表有错误了
@@ -67,6 +72,14 @@ public class UserController {
 			}
 			model.addAttribute("errorList", errorList);
 			return "user/error";
+		}
+		String oldFileName = multipartFile.getOriginalFilename();
+		if(multipartFile != null && oldFileName != null && oldFileName.length() != 0) {
+			String suffix = oldFileName.substring(oldFileName.lastIndexOf("."));
+			String newFileName = UUID.randomUUID()+"springMVC"+suffix;
+			String path = "e:\\springMVCFileUploadPic\\";
+			multipartFile.transferTo(new File(path+newFileName));
+			user.setFilename(newFileName);
 		}
 		userService.updateUser(user, id);
 		return "redirect:queryUserListPage.action?page=1";
@@ -79,7 +92,7 @@ public class UserController {
 		ModelAndView modelAndView = new ModelAndView();
 		PageBean pageBean = new PageBean();
 		int totalCount = userService.findUserCount();
-		int onePageCount = 15;
+		int onePageCount = 10;
 		int pageCount = (totalCount+onePageCount-1)/onePageCount;
 		int beginIndex = (page -1)*onePageCount;
 		HashMap<String,Integer> map = new HashMap<String,Integer>();
@@ -133,6 +146,12 @@ public class UserController {
 			userService.updateUser(user, user.getId());
 		}
 		return "redirect:queryUserListPage.action?page=1";
+	}
+	
+	//json数据交互
+	@RequestMapping("/requestJson.action")
+	public @ResponseBody User requestJson(@RequestBody User user)throws Exception{
+		return user;
 	}
 	
 	public UserService getUserService() {
