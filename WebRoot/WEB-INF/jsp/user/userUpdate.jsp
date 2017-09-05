@@ -11,7 +11,7 @@
 <body>
 <h1>用户修改表单页面</h1>
 <c:if test="${user != null }">
-	<form action="${pageContext.request.contextPath}/user/updateUser.action" method="post">
+	<form action="${pageContext.request.contextPath}/user/updateUser.action" method="post" enctype="mutipart/form-data">
 	<table border="0" bordercolor="black" cellspacing="0" cellpadding="3" style="text-alin:center;">
 		<tr>
 			
@@ -32,6 +32,9 @@
 		<tr>
 			<td>创建时间:</td>
 			<td><input type="text" value="<fmt:formatDate value='${user.createTime }' pattern='yyyy-MM-dd' />" name="createTime"/></td>
+		</tr>
+		<tr>
+			<td><input type="file"  name="multipartFile"/></td>
 		</tr>
 		<tr>
 			<td colspan="2"><input type="submit" value="提交"/></td>
